@@ -1,10 +1,8 @@
 # mvaneijgen_small_40
 
-![mvaneijgen_small_40](https://i.imgur.com/xAyqNb0.jpg)
+![mvaneijgen_small_40](https://i.imgur.com/AKm8gjQ.jpg)
 
-Layout can be found here http://www.keyboard-layout-editor.com/#/gists/402be2e06a8f2562e017f718c4017672
-
-A numpad with custom fucntion keys and switch layout for gaming. This keybaord will be part of a other custom keyboard called `mvaneijgen_keyboard_split`.
+Layout can be found here http://www.keyboard-layout-editor.com/#/gists/f41a3ca038961ca729d600bb026b0529
 
 Keyboard Maintainer: [mvaneijgen](https://github.com/mvaneijgen)  
 Hardware Supported: Pro Micro (ATmega32U4)
