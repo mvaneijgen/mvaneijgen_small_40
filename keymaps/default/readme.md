@@ -1,1 +1,1 @@
-# The default keymap for mvaneijgen_numpad_split
+# The default keymap for mvaneijgen_small_40
