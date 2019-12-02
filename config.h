@@ -41,12 +41,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
 */
-// #define MATRIX_ROW_PINS { B6, B2, B3, B1, F7 }
-#define MATRIX_ROW_PINS { F4, F5, F6, F7 }
-#define MATRIX_COL_PINS { B6, B2, B3, B1, C6, D4, D0, D1, B5, B4, E6, D7 }
-// #define MATRIX_COL_PINS { D7, E6, B4, B5, D1, D0, D4, C6, B1, B3, B2, B6 }
-// #define MATRIX_ROW_PINS { F7, B1, B3, B2, B6 }
-// #define MATRIX_COL_PINS { B5, B4, E6, D7, C6 }
+#define MATRIX_ROW_PINS { D1, D0, D4, C6 }
+#define MATRIX_COL_PINS { B6, B2, B3, B1, B5, B4, E6, D7, F7, F6, F5, F4 }
 #define UNUSED_PINS
 
 /* COL2ROW, ROW2COL*/
@@ -85,7 +81,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCING_DELAY 5
-
 /* define if matrix has ghost (lacks anti-ghosting diodes) */
 //#define MATRIX_HAS_GHOST
 
@@ -247,3 +242,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Bootmagic Lite key configuration */
 // #define BOOTMAGIC_LITE_ROW 0
 // #define BOOTMAGIC_LITE_COLUMN 0
+
+//------------------------------------------------------//
+// Custom code by mvaneijgen 
+//------------------------------------------------------//
+#define TAPPING_TERM 100
+#define COMBO_COUNT 3
+
+// 🚀 Free up space by disabling some parts of QMK
+// #define DISABLE_LEADER
+// #ifndef NO_DEBUG
+// #define NO_DEBUG
+// #endif // !NO_DEBUG
+// #if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+// #define NO_PRINT
+// #endif // !NO_PRINT
+// END Custom code by mvaneijgen -------------------------------------//
+

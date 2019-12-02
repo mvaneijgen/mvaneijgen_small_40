@@ -15,23 +15,61 @@
  */
 #include QMK_KEYBOARD_H
 #define _BASE 0
-// #define _GAME 1
-#define _RESET 1
+#define _NUMBERS 1
+#define _RESET 2
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
   QMKBEST = SAFE_RANGE,
   QMKURL
 };
 
+//------------------------------------------------------//
+// 💃 Tap Dance Definitions 
+//------------------------------------------------------//
+enum {
+  TD_BACKSPACE = 0,
+};
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_BACKSPACE]  = ACTION_TAP_DANCE_DOUBLE(KC_BSPACE, KC_LBRC),
+};
+// END 💃 Tap Dance Definitions -------------------------------------//
+
+//------------------------------------------------------//
+// 🛹 Custom key combos 
+// 📝: If you add a new combo update #define COMBO_COUNT 1 in 
+//------------------------------------------------------//
+enum combos {
+  LGUI_ESC_SLEEP,
+  LGUI_LEFT_MRWD,
+  LGUI_RIGHT_MFFD,
+};
+
+const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
+const uint16_t PROGMEM lgui_esc_combo[] = {KC_LGUI, KC_ESC, COMBO_END};
+const uint16_t PROGMEM lgui_right_combo[] = {KC_LGUI, KC_RIGHT, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [LGUI_ESC_SLEEP] = COMBO(lgui_esc_combo, KC_SYSTEM_SLEEP),
+  [LGUI_LEFT_MRWD] = COMBO(lgui_left_combo, KC_MRWD),
+  [LGUI_RIGHT_MFFD] = COMBO(lgui_right_combo, KC_MFFD),
+};
+// END 🛹 Custom key combos -------------------------------------//
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
     KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPACE, 
-		KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, 
-		KC_LSHIFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_DOT, KC_UP, TO(_RESET), 
-		KC_LCTL, KC_LALT, KC_LGUI, KC_ENT, KC_SPC, TO(_RESET), KC_LEFT, KC_DOWN, KC_RIGHT
+		KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_BSLASH, 
+		KC_LSHIFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_DOT, KC_UP, MO(_RESET), 
+		KC_LCTL, KC_LALT, KC_LCMD, KC_ENT, KC_SPC, MO(_NUMBERS), KC_LEFT, KC_DOWN, KC_RIGHT
+  ),
+  [_NUMBERS] = LAYOUT( /* Game */
+    KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRNS, 
+		KC_TRNS, KC_EXCLAIM, KC_AT, KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRCUMFLEX, KC_AMPERSAND, KC_ASTERISK, KC_LEFT_PAREN, KC_COLON, 
+		KC_TRNS, KC_LEFT_PAREN, KC_RIGHT_PAREN, KC_UNDERSCORE, KC_PLUS, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE, KC_PIPE, KC_DOUBLE_QUOTE, KC_LEFT_ANGLE_BRACKET, KC__VOLUP, MO(_RESET), 
+		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(_BASE), KC_BRMD, KC__VOLDOWN, KC_BRMU
   ),
   [_RESET] = LAYOUT( /* Game */
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET, 
+    RESET, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET, 
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, 
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_BASE), 
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_BASE), KC_TRNS, KC_TRNS, KC_TRNS
