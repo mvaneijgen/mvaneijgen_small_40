@@ -34,24 +34,30 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 // END 💃 Tap Dance Definitions -------------------------------------//
 
-//------------------------------------------------------//
+//-------------------------------------------------------------------------------------------//
 // 🛹 Custom key combos 
-// 📝: If you add a new combo update #define COMBO_COUNT 1 in 
-//------------------------------------------------------//
+// Note 📝: If you add a new combo update #define COMBO_COUNT 1 in config.h
+//-------------------------------------------------------------------------------------------//
 enum combos {
-  LGUI_ESC_SLEEP,
-  LGUI_LEFT_MRWD,
-  LGUI_RIGHT_MFFD,
+  LCMD_ESC_SLEEP,
+  LCMD_LEFT_MRWD,
+  LCMD_RIGHT_MFFD,
+  LCMD_UP_BRMU,
+  LCMD_DOWN_BRMD,
 };
 
-const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
-const uint16_t PROGMEM lgui_esc_combo[] = {KC_LGUI, KC_ESC, COMBO_END};
-const uint16_t PROGMEM lgui_right_combo[] = {KC_LGUI, KC_RIGHT, COMBO_END};
+const uint16_t PROGMEM lcmd_esc_combo[] = {KC_LCMD, KC_ESC, COMBO_END};
+const uint16_t PROGMEM lcmd_left_combo[] = {KC_LCMD, KC_RIGHT, COMBO_END};
+const uint16_t PROGMEM lcmd_right_combo[] = {KC_LCMD, KC_LEFT, COMBO_END};
+const uint16_t PROGMEM lcmd_up_combo[] = {KC_LCMD, KC_UP, COMBO_END};
+const uint16_t PROGMEM lcmd_down_combo[] = {KC_LCMD, KC_DOWN, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [LGUI_ESC_SLEEP] = COMBO(lgui_esc_combo, KC_SYSTEM_SLEEP),
-  [LGUI_LEFT_MRWD] = COMBO(lgui_left_combo, KC_MRWD),
-  [LGUI_RIGHT_MFFD] = COMBO(lgui_right_combo, KC_MFFD),
+  [LCMD_ESC_SLEEP] = COMBO(lcmd_esc_combo, KC_SYSTEM_SLEEP),
+  [LCMD_LEFT_MRWD] = COMBO(lcmd_left_combo, KC_MRWD),
+  [LCMD_RIGHT_MFFD] = COMBO(lcmd_right_combo, KC_MFFD),
+  [LCMD_UP_BRMU] = COMBO(lcmd_up_combo, KC_BRMU),
+  [LCMD_DOWN_BRMD] = COMBO(lcmd_down_combo, KC_BRMD),
 };
 // END 🛹 Custom key combos -------------------------------------//
 
