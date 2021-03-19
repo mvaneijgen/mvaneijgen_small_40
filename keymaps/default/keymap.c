@@ -17,12 +17,6 @@
 #define _BASE 0
 #define _NUMBERS 1
 #define _RESET 2
-// Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes {
-  QMKBEST = SAFE_RANGE,
-  QMKURL
-};
-
 //------------------------------------------------------//
 // 💃 Tap Dance Definitions 
 //------------------------------------------------------//
@@ -34,32 +28,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 // END 💃 Tap Dance Definitions -------------------------------------//
 
-//-------------------------------------------------------------------------------------------//
-// 🛹 Custom key combos 
-// Note 📝: If you add a new combo update #define COMBO_COUNT 1 in config.h
-//-------------------------------------------------------------------------------------------//
-// enum combos {
-//   LCMD_ESC_SLEEP,
-//   LCMD_LEFT_MRWD,
-//   LCMD_RIGHT_MFFD,
-//   LCMD_UP_BRMU,
-//   LCMD_DOWN_BRMD,
-// };
-
-// const uint16_t PROGMEM lcmd_esc_combo[] = {KC_LCMD, KC_ESC, COMBO_END};
-// const uint16_t PROGMEM lcmd_left_combo[] = {KC_LCMD, KC_RIGHT, COMBO_END};
-// const uint16_t PROGMEM lcmd_right_combo[] = {KC_LCMD, KC_LEFT, COMBO_END};
-// const uint16_t PROGMEM lcmd_up_combo[] = {KC_LCMD, KC_UP, COMBO_END};
-// const uint16_t PROGMEM lcmd_down_combo[] = {KC_LCMD, KC_DOWN, COMBO_END};
-
-// combo_t key_combos[COMBO_COUNT] = {
-//   [LCMD_ESC_SLEEP] = COMBO(lcmd_esc_combo, KC_SYSTEM_SLEEP),
-//   [LCMD_LEFT_MRWD] = COMBO(lcmd_left_combo, KC_MRWD),
-//   [LCMD_RIGHT_MFFD] = COMBO(lcmd_right_combo, KC_MFFD),
-//   [LCMD_UP_BRMU] = COMBO(lcmd_up_combo, KC_BRMU),
-//   [LCMD_DOWN_BRMD] = COMBO(lcmd_down_combo, KC_BRMD),
-// };
-// END 🛹 Custom key combos -------------------------------------//
 //------------------------------------------------------//
 // 🏠️ Home row mods 
 //------------------------------------------------------//
@@ -96,28 +64,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_BASE), KC_TRNS, KC_TRNS, KC_TRNS
   ),
 };
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case QMKBEST:
-      if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("QMK is the best thing ever!");
-      } else {
-        // when keycode QMKBEST is released
-      }
-      break;
-    case QMKURL:
-      if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
-      }
-      break;
-  }
-  return true;
-}
 
 void matrix_init_user(void) {
 
