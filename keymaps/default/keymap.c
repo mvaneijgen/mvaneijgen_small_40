@@ -16,7 +16,7 @@
 #include QMK_KEYBOARD_H
 #define _BASE 0
 #define _NUMBERS 1
-#define _RESET 2
+#define _RESET 1
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
   QMKBEST = SAFE_RANGE,
@@ -38,35 +38,50 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // 🛹 Custom key combos 
 // Note 📝: If you add a new combo update #define COMBO_COUNT 1 in config.h
 //-------------------------------------------------------------------------------------------//
-enum combos {
-  LCMD_ESC_SLEEP,
-  LCMD_LEFT_MRWD,
-  LCMD_RIGHT_MFFD,
-  LCMD_UP_BRMU,
-  LCMD_DOWN_BRMD,
-};
+// enum combos {
+//   LCMD_ESC_SLEEP,
+//   LCMD_LEFT_MRWD,
+//   LCMD_RIGHT_MFFD,
+//   LCMD_UP_BRMU,
+//   LCMD_DOWN_BRMD,
+// };
 
-const uint16_t PROGMEM lcmd_esc_combo[] = {KC_LCMD, KC_ESC, COMBO_END};
-const uint16_t PROGMEM lcmd_left_combo[] = {KC_LCMD, KC_RIGHT, COMBO_END};
-const uint16_t PROGMEM lcmd_right_combo[] = {KC_LCMD, KC_LEFT, COMBO_END};
-const uint16_t PROGMEM lcmd_up_combo[] = {KC_LCMD, KC_UP, COMBO_END};
-const uint16_t PROGMEM lcmd_down_combo[] = {KC_LCMD, KC_DOWN, COMBO_END};
+// const uint16_t PROGMEM lcmd_esc_combo[] = {KC_LCMD, KC_ESC, COMBO_END};
+// const uint16_t PROGMEM lcmd_left_combo[] = {KC_LCMD, KC_RIGHT, COMBO_END};
+// const uint16_t PROGMEM lcmd_right_combo[] = {KC_LCMD, KC_LEFT, COMBO_END};
+// const uint16_t PROGMEM lcmd_up_combo[] = {KC_LCMD, KC_UP, COMBO_END};
+// const uint16_t PROGMEM lcmd_down_combo[] = {KC_LCMD, KC_DOWN, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-  [LCMD_ESC_SLEEP] = COMBO(lcmd_esc_combo, KC_SYSTEM_SLEEP),
-  [LCMD_LEFT_MRWD] = COMBO(lcmd_left_combo, KC_MRWD),
-  [LCMD_RIGHT_MFFD] = COMBO(lcmd_right_combo, KC_MFFD),
-  [LCMD_UP_BRMU] = COMBO(lcmd_up_combo, KC_BRMU),
-  [LCMD_DOWN_BRMD] = COMBO(lcmd_down_combo, KC_BRMD),
-};
+// combo_t key_combos[COMBO_COUNT] = {
+//   [LCMD_ESC_SLEEP] = COMBO(lcmd_esc_combo, KC_SYSTEM_SLEEP),
+//   [LCMD_LEFT_MRWD] = COMBO(lcmd_left_combo, KC_MRWD),
+//   [LCMD_RIGHT_MFFD] = COMBO(lcmd_right_combo, KC_MFFD),
+//   [LCMD_UP_BRMU] = COMBO(lcmd_up_combo, KC_BRMU),
+//   [LCMD_DOWN_BRMD] = COMBO(lcmd_down_combo, KC_BRMD),
+// };
 // END 🛹 Custom key combos -------------------------------------//
+//------------------------------------------------------//
+// 🏠️ Home row mods 
+//------------------------------------------------------//
+// Left-hand home row mods
+#define CTL_A LCTL_T(KC_A)
+#define ALT_S LALT_T(KC_S)
+#define GUI_D LGUI_T(KC_D)
+#define SFT_F LSFT_T(KC_F)
+
+// Right-hand home row mods
+#define SFT_J RSFT_T(KC_J)
+#define GUI_K RGUI_T(KC_K)
+#define ALT_L LALT_T(KC_L)
+#define CTL_SCLN RCTL_T(KC_SCLN)
+// END 🏠️ Home row mods -------------------------------------//
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
     KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPACE, 
-		KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_BSLASH, 
-		KC_LSHIFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_DOT, KC_UP, MO(_RESET), 
-		KC_LCTL, KC_LALT, KC_LCMD, KC_ENT, KC_SPC, MO(_NUMBERS), KC_LEFT, KC_DOWN, KC_RIGHT
+		KC_TAB, CTL_A, ALT_S, GUI_D, SFT_F, KC_G, KC_H, SFT_J, GUI_K, ALT_L, CTL_SCLN, 
+		KC_LSHIFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMMA, KC_UP, MO(_RESET), 
+		KC_LCTL, KC_LALT, KC_LCMD, KC_ENT, KC_SPC, MO(_BASE), KC_LEFT, KC_DOWN, KC_RIGHT
   ),
   [_NUMBERS] = LAYOUT( /* Game */
     KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRNS, 
