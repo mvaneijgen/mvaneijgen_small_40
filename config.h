@@ -257,7 +257,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Apply the modifier on keys that are tapped during a short hold of a modtap
 #define PERMISSIVE_HOLD
-// #define COMBO_COUNT 5
 
 // 🚀 Free up space by disabling some parts of QMK
 // #define DISABLE_LEADER
