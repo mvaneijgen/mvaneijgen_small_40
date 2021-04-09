@@ -33,13 +33,13 @@
 #define CTL_SCLN RCTL_T(KC_F22)
 // END 🏠️ Home row mods -------------------------------------//
 
-// enum custom_keycodes {
-//     KC_CMEX,
-// };
+enum custom_keycodes {
+    KC_BSPCDEL,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
-    LT(_RESET, KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPACE, 
+    LT(_RESET, KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPCDEL, 
     KC_TAB, CTL_A, ALT_S, GUI_D, SFT_F, KC_G, KC_H, SFT_J, GUI_K, ALT_L, CTL_BSLS, 
     KC_NO, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, 
     KC_NO, KC_NO, MO(_NUMSYM), LT(_NUMSYM, KC_ENT), KC_SPC, MO(_CTRL), KC_NO, KC_NO, KC_NO
@@ -83,19 +83,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case ALT_RCBR: if (record->tap.count > 0) { if (record->event.pressed) { tap_code16(KC_RCBR); } return false; }
       case CTL_SCLN: if (record->tap.count > 0) { if (record->event.pressed) { tap_code16(KC_SCLN); } return false; }
       // Custom shift keys
-// case KC_CMEX: 
-//   if (record->event.pressed) {
-//     if (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT)){
-//       register_code(KC_1);
-//     } else {
-//       register_code(KC_COMM);
-//     }
-//   } else {
-//     unregister_code(KC_1);
-//     unregister_code(KC_COMM);
-//   }
-//   return false;
-//       break;
+      static uint8_t saved_mods = 0; // Place this outside of the switch, but inside process_record_user()
+case KC_BSPCDEL:
+    if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) {
+            saved_mods = get_mods() & MOD_MASK_SHIFT; // Mask off anything that isn't Shift
+            del_mods(saved_mods); // Remove any Shifts present
+            register_code(KC_DEL);
+        } else {
+            saved_mods = 0; // Clear saved mods so the add_mods() below doesn't add Shifts back when it shouldn't
+            register_code(KC_BSPC);
+        }
+    } else {
+        add_mods(saved_mods);
+        unregister_code(KC_DEL);
+        unregister_code(KC_BSPC);
+    }
+
+    return false;
    }
    return true;
 }
