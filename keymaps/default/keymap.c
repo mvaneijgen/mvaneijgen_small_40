@@ -45,12 +45,27 @@
 
 // END 🏠️ Home row mods -------------------------------------//
 //------------------------------------------------------//
+// 👨‍💻 Custom short codes  
+//------------------------------------------------------//
+// #define KC_FORC LGUI(LALT(KC_ESC)) // Force quit
+// #define KC_CTXT LGUI(LSFT(KC_2)) // Capture text from image
+// #define KC_CAPW LGUI(LSFT(KC_3)) // Capture whole screen
+// #define KC_CAPP LGUI(LSFT(KC_4)) // Capture portion of screen
+// #define KC_CREC LGUI(LSFT(KC_5)) // Record screen
+// #define KC_TLFT LGUI(LSFT(KC_LBRC)) // Move tab left
+// #define KC_TRGT LGUI(LSFT(KC_RBRC)) // Move tab Right
+// #define KC_EURO LALT(KC_2) // Euro €
+// #define KC_EMDS LALT(LSFT(KC_MINUS)) // Euro €
+// #define KC_MUTM LGUI(LSFT(LALT(KC_M))) // Euro €
+// END 👨‍💻 Custom short codes  -------------------------------------//
+//------------------------------------------------------//
 // 💃 Tap Dance  
 //------------------------------------------------------//
 #define KC_CMDZ LGUI(KC_Z) // Custom CMD + Z
 #define KC_CMDX LGUI(KC_X) // Custom CMD + X
 #define KC_CMDC LGUI(KC_C) // Custom CMD + C
 #define KC_CMDV LGUI(KC_V) // Custom CMD + V
+
 
 enum {
   TD_Z_CMDZ,
@@ -59,7 +74,7 @@ enum {
   TD_V_CMDV,
 };
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_Z_CMDZ] = ACTION_TAP_DANCE_DOUBLE(KC_Z, KC_CMDZ),
   [TD_X_CMDX] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_CMDX),
   [TD_C_CMDC] = ACTION_TAP_DANCE_DOUBLE(KC_C, KC_CMDC),
@@ -78,9 +93,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, MO(_NUMSYM), LT(_NUMSYM, KC_ENT), KC_SPC, MO(_CTRL), _______, _______, _______
   ),
   [_GAME] = LAYOUT(
-    LT(_RESET, KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPACE, 
+    LT(_RESET, KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, 
     KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_BSLS, 
-    KC_LSHIFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMMA, KC_UP, MO(_RESET), 
+    KC_LSFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMMA, KC_UP, MO(_RESET), 
     KC_LCTL, KC_LALT, KC_LCMD, KC_SPC, KC_ENT, MO(_NUMSYM), KC_LEFT, KC_DOWN, KC_RIGHT
   ),
   [_NUMSYM] = LAYOUT(
@@ -91,12 +106,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_CTRL] = LAYOUT(
     KC_FORC, KC_CAPW, KC_CTXT, KC_UP, KC_CAPP, KC_CREC, _______, KC_TLFT, KC_MFFD, KC_TRGT, _______, _______, 
-    _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_BRMD, KC_BRMU, RSFT_T(KC_VOLD), RGUI_T(KC_MPLY), LALT_T(KC_VOLU), RCTL_T(KC__MUTE), 
+    _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_BRMD, KC_BRMU, RSFT_T(KC_VOLD), RGUI_T(KC_MPLY), LALT_T(KC_VOLU), RCTL_T(KC_MUTE), 
     _______, _______, _______, _______, _______, _______, _______, KC_MRWD, _______, _______, _______, _______, 
     _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
   [_RESET] = LAYOUT(
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET, 
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT, 
     TG(_GAME), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
     _______, _______, TG(_BASE), _______, _______, TG(_BASE), _______, _______, _______
