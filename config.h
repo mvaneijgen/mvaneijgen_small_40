@@ -22,7 +22,11 @@
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
 #define QUICK_TAP_TERM 0
-
+#define WS2812_DI_PIN D2
+#define RGBLED_NUM 1
+#define RGBLIGHT_DEFAULT_HUE 255
+#define RGBLIGHT_DEFAULT_SAT 255
+#define RGBLIGHT_LIMIT_VAL 125
 // #define QUICK_TAP_TERM 0
 // #define RETRO_TAPPING
 

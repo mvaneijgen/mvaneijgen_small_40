@@ -4,6 +4,7 @@
 #define _NUMSYM 2
 #define _CTRL 3
 #define _RESET 4
+#define _SOPHIE 5
 //------------------------------------------------------//
 // 🏠️ Home row mods 
 //------------------------------------------------------//
@@ -112,10 +113,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RESET] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT, 
-    TG(_GAME), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+    TG(_GAME), _______, TG(_SOPHIE), _______, _______, _______, _______, _______, _______, _______, _______, 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
     _______, _______, TG(_BASE), _______, _______, TG(_BASE), _______, _______, _______
   ),
+  [_SOPHIE] = LAYOUT(
+    LT(_RESET, KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, 
+    KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_BSLS, 
+    KC_LSFT, KC_GRAVE, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMMA, KC_UP, MO(_NUMSYM), 
+    KC_LCTL, KC_LALT, KC_LCMD, KC_SPC, KC_ENT, MO(_NUMSYM), KC_LEFT, KC_DOWN, KC_RIGHT
+  ),              
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -130,25 +137,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case GUI_RPRN: if (record->tap.count > 0) { if (record->event.pressed) { tap_code16(KC_RPRN); } return false; }
       case ALT_RCBR: if (record->tap.count > 0) { if (record->event.pressed) { tap_code16(KC_RBRC); } return false; }
       case CTL_SCLN: if (record->tap.count > 0) { if (record->event.pressed) { tap_code16(KC_SCLN); } return false; }
-      // Custom shift keys
-//       static uint8_t saved_mods = 0; // Place this outside of the switch, but inside process_record_user()
-// case KC_BSPCDEL:
-//     if (record->event.pressed) {
-//         if (get_mods() & MOD_MASK_SHIFT) {
-//             saved_mods = get_mods() & MOD_MASK_SHIFT; // Mask off anything that isn't Shift
-//             del_mods(saved_mods); // Remove any Shifts present
-//             register_code(KC_DEL);
-//         } else {
-//             saved_mods = 0; // Clear saved mods so the add_mods() below doesn't add Shifts back when it shouldn't
-//             register_code(KC_BSPC);
-//         }
-//     } else {
-//         add_mods(saved_mods);
-//         unregister_code(KC_DEL);
-//         unregister_code(KC_BSPC);
-//     }
-
-//     return false;
     }
    return true;
+}
+// Change led color per layer
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _SOPHIE:
+            rgblight_setrgb(255, 0, 149);
+            break;
+        case _GAME:
+            rgblight_setrgb(0, 187, 170);
+            break;
+        default: // for any other layers, or the default layer
+            rgblight_setrgb (255, 255, 255);
+            break;
+    }
+  return state;
 }
